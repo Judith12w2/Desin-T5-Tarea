@@ -6,67 +6,76 @@
     <groupId>tarea5</groupId>
     <artifactId>desin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>  <!-- Asegúrate de que esté definido -->
+    <packaging>jar</packaging> <!-- Asegúrate de que esté definido -->
 
-<build>
-    <plugins>
-        <!-- Plugin para compilar y empaquetar en un JAR -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jar-plugin</artifactId>
-            <version>3.2.0</version>
-            <executions>
-                <execution>
-                    <id>default-jar</id>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>jar</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
+    <properties>
+        <!-- Configuración para Java 8 o superior -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
-        <!-- Plugin para ensamblar un JAR con dependencias -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>3.3.0</version>
-            <executions>
-                <execution>
-                    <id>make-jar-with-dependencies</id>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>single</goal>
-                    </goals>
-                    <configuration>
-                        <descriptorRefs>
-                            <descriptorRef>jar-with-dependencies</descriptorRef>
-                        </descriptorRefs>
-                        <archive>
-                            <manifest>
-                                <mainClass>Main.Main</mainClass>
-                            </manifest>
-                        </archive>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
+    <build>
+        <plugins>
+            <!-- Plugin para compilar y empaquetar en un JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>default-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
-        <!-- Plugin Launch4j para generar el archivo .exe -->
-        <plugin>
-            <groupId>com.akathist.maven.plugins.launch4j</groupId>
-            <artifactId>launch4j-maven-plugin</artifactId>
-            <version>1.7.25</version>
-            <configuration>
-                <outfile>target/desin.exe</outfile>
-                <jar>target/desin-0.0.1-SNAPSHOT.jar</jar>
-                <icon>src/main/resources/icono.ico</icon> <!-- Opcional -->
-                <headerType>console</headerType>
-                <bundleJre>true</bundleJre>
-                <jreMinVersion>1.8.0</jreMinVersion>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
+            <!-- Plugin para ensamblar un JAR con dependencias -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>make-jar-with-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <archive>
+                                <manifest>
+                                    <mainClass>Main.Main</mainClass> <!-- Asegúrate de que esta sea la clase principal correcta -->
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Plugin Launch4j para generar el archivo .exe -->
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>1.7.25</version>
+                <configuration>
+                    <outfile>target/desin.exe</outfile>
+                    <jar>target/desin-0.0.1-SNAPSHOT-jar-with-dependencies.jar</jar> <!-- Cambié a jar con dependencias -->
+                    <icon>src/main/resources/icono.ico</icon> <!-- Opcional -->
+                    <headerType>console</headerType>
+                    <bundleJre>true</bundleJre>
+                    <jreMinVersion>1.8.0</jreMinVersion>
+                    <jvmArgs>
+                        --add-opens=java.base/java.util=ALL-UNNAMED <!-- Añadí esta opción para evitar problemas con Java 9+ -->
+                    </jvmArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
