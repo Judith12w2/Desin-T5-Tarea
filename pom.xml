@@ -1,35 +1,55 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>tarea5</groupId>
-	<artifactId>tarea5</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
- 
-<build>
-    <plugins>
-        <plugin>
-            <groupId>com.akathist.maven.plugins.launch4j</groupId>
-            <artifactId>launch4j-maven-plugin</artifactId>
-            <version>2.5.3</version>
-            <executions>
-                <execution>
-                    <id>l4j-clui</id>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>launch4j</goal>
-                    </goals>
-                </execution>
-            </executions>
-            <configuration>
-                <headerType>gui</headerType>
-                <outfile>${project.build.directory}/${project.build.finalName}.exe</outfile>
-                <jar>${project.build.directory}/${project.build.finalName}.jar</jar>
-                <errTitle>App Error</errTitle>
-                <mainClass>Main.Main</mainClass> <!-- Asegúrate de que sea la clase correcta -->
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
+    <groupId>tarea5</groupId>
+    <artifactId>tarea5</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>  <!-- Asegúrate de que esté definido -->
+
+    <build>
+        <plugins>
+            <!-- Plugin para compilar y empaquetar en un .jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Plugin para indicar el mainClass (si es un ejecutable) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>make-jar-with-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <archive>
+                                <manifest>
+                                    <mainClass>Main.Main</mainClass> <!-- Asegúrate de que el paquete sea correcto -->
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
