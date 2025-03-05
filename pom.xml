@@ -51,6 +51,21 @@
                 </execution>
             </executions>
         </plugin>
+
+        <!-- Plugin Launch4j para generar el archivo .exe -->
+        <plugin>
+            <groupId>com.akathist.maven.plugins.launch4j</groupId>
+            <artifactId>launch4j-maven-plugin</artifactId>
+            <version>1.7.25</version>
+            <configuration>
+                <outfile>target/desin.exe</outfile>
+                <jar>target/desin-0.0.1-SNAPSHOT.jar</jar>
+                <icon>src/main/resources/icono.ico</icon> <!-- Opcional -->
+                <headerType>console</headerType>
+                <bundleJre>true</bundleJre>
+                <jreMinVersion>1.8.0</jreMinVersion>
+            </configuration>
+        </plugin>
     </plugins>
 </build>
 
