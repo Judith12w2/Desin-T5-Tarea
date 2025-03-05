@@ -1,0 +1,13 @@
+<launch4jConfig>
+    <outputFile>${workspace}/target/DESIN-0.0.1-SNAPSHOT.exe</outputFile>
+    <jar>${workspace}/target/DESIN-0.0.1-SNAPSHOT.jar</jar>
+    <icon>${workspace}/resources/myicon.ico</icon>
+    <dontWrapJar>false</dontWrapJar>
+    <headerType>gui</headerType>
+    <jre>
+        <minVersion>1.8.0</minVersion>
+        <maxVersion></maxVersion>
+        <jdkPreference>preferJre</jdkPreference>
+    </jre>
+    <verbose>false</verbose>
+</launch4jConfig>
