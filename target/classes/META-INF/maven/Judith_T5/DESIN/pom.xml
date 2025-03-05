@@ -4,5 +4,33 @@
   <artifactId>DESIN</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
+  <build>
+    <plugins>
+        <!-- Plugin para Launch4j -->
+        <plugin>
+            <groupId>com.github.johnnyjayjay</groupId>
+            <artifactId>launch4j-maven-plugin</artifactId>
+            <version>1.9.0</version> <!-- Asegúrate de usar la versión más reciente disponible -->
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>launch4j</goal>
+                    </goals>
+                    <phase>package</phase> <!-- Aquí defines en qué fase se ejecutará el plugin -->
+                    <configuration>
+                        <jar>target/DESIN-0.0.1-SNAPSHOT.jar</jar>
+                        <outfile>target/DESIN-0.0.1-SNAPSHOT.exe</outfile>
+                        <icon>resources/myicon.ico</icon>
+                        <dontWrapJar>false</dontWrapJar>
+                        <minJre>1.8.0</minJre> <!-- Si necesitas una versión mínima de Java -->
+                        <maxJre>1.8.0</maxJre> <!-- Si es necesario también puedes agregar la máxima versión de Java -->
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+
+  
   
 </project>
